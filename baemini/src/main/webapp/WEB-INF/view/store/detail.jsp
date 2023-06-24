@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ include file="/WEB-INF/view/include/link.jsp"%>
 <script type="text/javascript"
-	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=3fe0c2eaecb263f09df91a81c2ec64a0&libraries=services,clusterer,drawing"></script>
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=c576415305a208127dea97ebf2c1e26b&libraries=services,clusterer,drawing"></script>
 <link rel="stylesheet" href="/css/modal.css">
 <link rel="stylesheet" href="/css/store/detail.css">
 
