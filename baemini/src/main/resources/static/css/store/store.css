@@ -1,0 +1,134 @@
+.active {
+	background: #ddd;
+    color: #af8865; 
+}
+
+.container {
+    width: 100%;
+}
+
+
+/* 콘텐츠 */
+main {
+   background: #fff; 
+}
+
+/* 상단 카테고리 */
+.category{
+    border-bottom: 1px solid #ddd;
+    white-space: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden; 
+    padding: 15px 0;
+    box-shadow: 0px 2px 3px 0px rgb(0 0 0 / 25%);
+    margin: 0 auto;
+    max-width: 1200px;
+}
+
+.category::-webkit-scrollbar {
+    background: none;
+}
+
+.category li {
+    font-size: 1.6rem;
+	font-weight: bold;
+    padding: 0 15px;
+    display:inline;
+    color: #ddd;
+}
+
+.category li > span{
+	padding-bottom: 5px;
+}
+
+.category li:hover {
+    color: #333333;
+    cursor: pointer;
+    transition: 0.1s;
+}
+
+/* 상단 카테고리 */
+
+
+/* 상단 옵션 */
+.option  { 
+    font-size: 1.6rem;
+    margin: 0 auto;
+    margin-top: 10px;
+    max-width: 1200px;
+}
+.option ul { 
+    margin:20px 10px;
+}
+
+.option li { 
+    display: inline;
+    padding: 10px 20px;
+    border-radius: 20px;
+}
+
+.option li:hover {  
+   	background: #ddd;
+    color: #af8865; 
+    transition: 0.1s;
+}
+
+/* 상단 옵션 */
+
+
+/* 가게 목록 */
+/* 분리 */
+/* 가게 목록 */
+
+
+/* 콘텐츠 */
+
+
+
+
+@media (max-width:1024px) {
+	.container {
+	    width: 100%;
+	}
+	
+	.option  { 
+	    white-space: nowrap;
+	    overflow-x: auto;
+	    overflow-y:hidden; 
+	}
+	
+	.option::-webkit-scrollbar  { 
+	    background:none;
+	}
+	
+}
+
+
+@media (max-width:767px) {
+	
+	.container {
+	    width: 99%;
+	}
+	
+	.category {
+		padding: 10px 0;
+		height: 25px;
+	}
+	
+	.category li {
+	    font-size: 15px;
+	    padding: 10px 15px;
+	}
+	.option  { 
+	   font-size: 13px;
+	}
+	
+	.option ul { 
+	    margin:10px;
+	}
+	
+	
+}
+
+
+

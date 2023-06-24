@@ -1,0 +1,87 @@
+@charset "utf-8";
+@import url("/css/admin/modal_storeRegister.css");
+
+/* 메뉴 추가 모달 */
+.add_menu_modal .option_box {
+	position: relative;
+}
+
+.add_menu_modal .option_box h2 {
+	width: 70%;
+	margin: 0 auto;
+	position: relative;
+}
+
+.add_menu_modal .option_box h2 .add_option {
+	background: #fff;
+	padding: 3px;
+	font-size: 1.2rem;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+.add_menu_modal .option {
+	border: 1px solid #000;
+	width: 70%;
+	margin: 0 auto;
+	border-radius: 10px;
+	display: flex;
+}
+
+.add_menu_modal .option>div {
+	padding: 8px;
+}
+
+.add_menu_modal .option>div:nth-child(1) {
+	flex: 1.5;
+	text-align: left;
+	padding: 10px;
+	min-width: 40px;
+}
+
+.add_menu_modal .option>div:nth-child(1)>div {
+	margin: 5px 0;
+	height: 30px;
+}
+
+.add_menu_modal .option>div:nth-child(2) {
+	flex: 8;
+}
+
+.add_menu_modal .option>div:nth-child(3) {
+	flex: 0.5;
+	min-width: 30px;
+}
+
+.add_menu_modal .option .add_option_cancle {
+	background: #ddd;
+	margin-top: 5px;
+	border-radius: 50%;
+	height: 20px;
+	width: 20px;
+	font-size: 1.1rem;
+	border: none;
+}
+
+.add_menu_modal .option>div input {
+	height: 30px;
+	margin: 5px 0;
+}
+
+.add_menu_modal #btn_box button[type=submit] {
+	background: rgb(48, 218, 217);
+}
+
+@media ( max-width : 767px) {
+	.add_menu_modal .option {
+		width: 80%;
+	}
+	.add_menu_modal .option_box h2 {
+		width: 80%;
+	}
+	.add_menu_modal .option_box h2 .add_option {
+		border-radius: 10px;
+	}
+}
+/* 메뉴 추가 모달 */

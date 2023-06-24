@@ -1,0 +1,82 @@
+/* 하단 메뉴 */
+nav {
+    height: 80px;
+    border-top:1px solid #ccc;
+    position: sticky;
+    bottom: 0;
+    z-index: 1;
+    background: #fff;
+}
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 10px;
+    width: 80%;
+    max-width : 1200px;
+    margin: 0 auto;
+}
+
+nav ul li a {
+    display: block;
+    width: 60px;
+    height: 60px;
+    transition: 0.1s;
+
+}
+
+nav ul li:nth-child(1) a {
+    background: url("/img/nav1.png") ;
+    background-size: cover;
+}
+
+nav ul li:nth-child(2) a {
+    background: url("/img/nav2.png") ;
+    background-size: cover;
+}
+
+nav ul li:nth-child(3) a {
+    background: url("/img/nav3.png") ;
+    background-size: cover;
+}
+
+nav ul li:nth-child(4) a {
+    background: url("/img/nav4.png") ;
+    background-size: cover;
+}
+
+nav ul li:nth-child(5) a {
+    background: url("/img/nav5.png") ;
+    background-size: cover;
+}
+
+nav ul li a:hover {
+    transform: scale(1.15); 
+}
+
+
+@media (max-width:1023px) {
+	nav ul {
+	    width: 100%;
+	}
+}
+@media  (max-width:767px) {
+
+    nav {
+        height: 65px;
+    }
+
+    nav ul li a {
+        display: block;
+	    width: 45px;
+        height: 45px;
+    }
+
+}
+
+
+  
+
+
+/* 하단 메뉴 */
+

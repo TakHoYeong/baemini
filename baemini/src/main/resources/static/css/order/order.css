@@ -1,0 +1,217 @@
+@charset "UTF-8";
+html {
+	font-size: 60%;
+}
+ 
+.input_area, textarea {
+	border-radius: 10px;
+}
+ 
+main {
+	width: 800px;
+	margin: 0 auto 50px;
+}
+.temp_img_box {
+	display: none;
+}
+ 
+.temp_img {
+	display: block;
+	width: 90%;
+	max-width: 500px;
+	margin: 0 auto;
+}
+section.title {
+	width: 100%;
+}
+ 
+section.title h1 {
+	text-align: center;
+	margin: 30px 0 50px 0;
+}
+ 
+/* main */
+main form>ul>li {
+	margin-bottom: 30px;
+}
+ 
+main div {
+	margin-bottom: 5px;
+}
+ 
+main .menu_option, .price {
+	color: #999;
+}
+ 
+main h2 {
+	margin-bottom: 5px;
+	position: relative;
+}
+ 
+main .order_info .delete_all {
+	position: absolute;
+	right: 0;
+	border: none;
+	padding: 5px;
+}
+ 
+main .order_info li {
+	position: relative;
+	border-bottom: 1px solid #ccc;
+	margin-bottom: 10px;
+}
+ 
+main .order_info li .food_name_box {
+	display: flex;
+	justify-content: space-between;
+	margin-right: 10px;
+}
+ 
+main .order_info li .food_name_box i {
+	color: #999;
+}
+ 
+main .amount {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+ 
+main .amount_box {
+	border: 1px solid #ddd;
+	display: flex;
+	width: 150px;
+	border-radius: 40px;
+	height: 35px;
+	overflow: hidden;
+}
+ 
+main .amount_box button {
+	border: none;
+	background: #fff;
+	font-size: 2.2rem;
+	width: 30%;
+}
+ 
+main .amount_box .amount_text {
+	text-align: center;
+	border: none;
+	width: 40%;
+}
+ 
+main .input_area {
+	width: 250px;
+	height: 30px;
+	border: 1px solid #ddd;
+}
+ 
+main .input_area input {
+	border: none;
+	width: 100%;
+	height: 100%;
+	padding: 0 10px;
+	box-sizing: border-box;
+}
+ 
+main #delevery_modify {
+	background: #ddd;
+	margin-left: 5px;
+	padding: 5px;
+}
+ 
+main .point_dis {
+	display: none;
+}
+ 
+main .order_btn {
+	width: 320px;
+	height: 50px;
+	border-radius: 5px;
+	background: #30DAD9;
+	color: white;
+	border: 2px solid #ddd;
+	font-weight: bold;
+}
+ 
+main .request textarea {
+	padding: 5px 10px;
+}
+ 
+main .point {
+	border: 1px solid #333333;
+	padding: 0 10px;
+	width: 300px;
+	position: relative;
+	border-radius: 10px;
+}
+ 
+main .point>div {
+	height: 45px;
+	line-height: 45px;
+	margin: 0;
+}
+ 
+main .point .icon {
+	position: absolute;
+	right: 15px;
+}
+ 
+main .point_input_box {
+	border-top: 1px solid;
+	display: none;
+}
+ 
+main .point_area .point_input {
+	width: calc(100% - 90px);
+	border: none;
+}
+ 
+main .use_point {
+	border: 1px solid #ddd;
+	background: #fff;
+	padding: 5px;
+	width: 80px;
+}
+ 
+input[type="submit"] {
+	cursor: pointer;
+}
+ 
+@media ( max-width :1024px) {
+	main {
+		width: 95%;
+	}
+}
+ 
+@media ( max-width :767px) {
+	main .input_area {
+		width: 100%;
+	}
+	main #delevery_modify {
+		border-radius: 10px;
+	}
+	.request {
+		margin: 0 auto;
+	}
+	.request textarea {
+		width: 100%;
+		display: block;
+		margin: 0 auto;
+		box-sizing: border-box;
+	}
+	main .use_point {
+		border-radius: 10px;
+	}
+	main .point {
+		margin: 0 auto;
+		width: 100%;
+		box-sizing: border-box;
+	}
+	main .order_btn {
+		width: 99%;
+		margin: 0 auto;
+	}
+	main .amount_box {
+		width: 125px;
+	}
+}

@@ -1,0 +1,52 @@
+logging:
+  level:
+    org:
+      springframework: DEBUG
+    '[org.springframework.web]': DEBUG
+
+spring:
+  mvc:
+    view:
+      prefix: /WEB-INF/view/
+      suffix: .jsp
+      
+  datasource:
+    driver-class-name: oracle.jdbc.driver.OracleDriver
+    url: jdbc:oracle:thin:@localhost:1521/xe
+    username: system
+    password: 1234
+  
+  servlet:
+    multipart:
+      max-request-size: 10MB
+      max-file-size: 10MB
+  
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 912555326757-bontf563aoejdgoc97mq6v5vsmt63tqk.apps.googleusercontent.com
+            client-secret: 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
+            scope: email, profile
+          
+        
+ 
+    
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  mapper-locations:
+  - classpath:com/baemin/mybatis/*.xml
+  type-aliases-package: com.baemin.dto
+    
+server:
+  port: 8989
+
+resource:
+  nodeValue: D:/resource
+  path: file:///D:/resource/
+  
+upload:
+  path: /upload/**
+  

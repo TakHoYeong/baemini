@@ -1,0 +1,180 @@
+/*--------- 모달 공통 ---------*/
+.modal {
+	width: 560px;
+	height: 85vh;
+	max-height: 720px;
+	position: fixed;
+	left: 50%;
+	top: 100%;
+	z-index: 200;
+	margin-left: -275px;
+	margin-top: 3%;
+	border-radius: 10px;
+	overflow-x: hidden;
+	overflow: hidden;
+	background: #fff;
+	box-shadow: 3px 3px 20px 10px rgb(0 0 0/ 25%);
+}
+
+#modal_header {
+	background: #333333;
+	position: relative;
+	width: 100%;
+	display: block;
+}
+
+.closeA {
+	background: #333333;
+	border: none;
+	color: #fff;
+	position: absolute;
+	cursor: pointer;
+	top: 0;
+	right: 2%;
+	width: 4%;
+	height: 100%;
+	font-size: 2.4rem;
+}
+
+.closeB {
+	background: #808080;
+}
+
+.modal h1 {
+	color: #fff;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 40px;
+}
+
+#modal_bg {
+	background: rgba(0, 0, 0, 0.3);
+	width: 100vw;
+	height: 100vh;
+	position: fixed;
+	top: 0;
+	left: 0;
+	display: none;
+	z-index: 10;
+}
+
+.modal_box {
+	position: relative;
+	overflow: auto;
+	overflow-x: hidden;
+	/* height: 70vh; */
+	height: calc(100% - 81px);
+}
+
+.modal_box::-webkit-scrollbar {
+	display: none; /* Chrome, Safari, Opera*/
+}
+
+.modal #btn_box {
+	/* 
+	position: absolute;
+	bottom: 0;
+	 */
+	width: 100%;
+	font-size: 1.8rem;
+	border-top: 1px solid #ddd;
+	height: 40px;
+}
+
+.modal .btn_box input, .modal #btn_box button {
+	height: 40px;
+	font-size: 2rem;
+	width: 50%;
+	float: left;
+	border: none;
+	color: white;
+	border-radius: unset;
+}
+
+.modal .btn_box input[type="submit"] {
+	background: #30DAD9;
+}
+
+
+
+/* input file */
+
+.modal .img_box {
+	width: 80%;
+	margin: 0 auto 50px;
+}
+
+.modal .img {
+	display: none; 
+}
+
+.modal .img_box label {
+	display: inline-block;
+	width: 80px;
+	height: 60px;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	text-align: center;
+	line-height: 60px;
+}
+
+.modal .img_box div {
+	margin-top: 20px;
+	position: relative;
+	display: none;
+	width: 150px;
+	height: 150px;
+}
+
+.modal .img_box img {
+	width: 100%;
+	height: 100%;
+	border-radius: 10px;
+	object-fit: cover;
+	border: 1px solid #ddd;
+}
+
+.modal .img_close {
+	background: #ccc;
+	position: absolute;
+	top: -10px;
+	right: -10px;
+	width: 25px;
+	height: 25px;
+	color: #fff;
+	border-radius: 50%;
+	border: none;
+}
+
+
+
+
+
+
+@media ( max-width :1023px) {
+}
+
+@media ( max-width :767px) {
+	.modal {
+		width: 80%;
+		margin-left: -40%;
+	}
+	.closeA {
+		display: none;
+	}
+	.modal {
+		width: 100%;
+		margin: 0;
+		/* margin-top: 1vh; */
+		left: 0;
+		height: 100%;
+	}
+	.modal .btn_box input, .modal .btn_box button {
+		height: 45px;
+	}
+}
+
+@media ( max-width :480px) {
+}

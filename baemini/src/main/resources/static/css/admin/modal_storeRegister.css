@@ -1,0 +1,134 @@
+@charset "utf-8";
+/*-------------- 매장 등록 모달 -----------------*/
+
+
+.modal form {
+	display: inline;
+}
+
+.modal .modal_box ul li {
+	padding: 10px;
+	text-align: center;
+}
+
+.modal .input_area {
+	width: 70%;
+	height: 35px;
+	margin: 0 auto;
+}
+
+.modal .modal_box #category {
+	width: 100%;
+	height: 100%;
+	padding: 0 10px;
+	border-radius: 10px;
+	border: 1px solid #000;
+	background: url(/img/arrow.png) no-repeat;
+	background-size: 1.5rem;
+	background-position: 98%;
+}
+
+.modal input[type=text], .modal input[type=number] {
+	width: 100%;
+	height: 100%;
+	padding: 0 10px;
+	box-sizing: border-box;
+	border: 1px solid #000;
+}
+
+.modal .location .input_area {
+	height: 100%;
+	border: 1px solid #ddd;
+	border-radius: 10px;
+	overflow: hidden;
+}
+
+.modal .location input[type=button] {
+	width: 100%;
+	height: 35px;
+	border: none;
+	border-radius: 0;
+	background: #ddd;
+}
+
+.modal .location input[type=text] {
+	height: 35px;
+	border: none;
+	background: none;
+}
+
+.modal .business_hour .select_box>span:first-child:after {
+	content: "~";
+}
+
+.modal .business_hour select {
+	height: 35px;
+	width: 25%;
+	border-radius: 10px;
+	padding: 0 10px;
+	background: url(/img/arrow.png) no-repeat;
+	background-size: 1.5rem;
+	background-position: 98%;
+}
+
+.modal .min_delevery_price .input_area, .modal .delevery_tip .input_area
+	{
+	position: relative;
+}
+
+.modal .min_delevery_price .input_area:after, .modal .delevery_tip .input_area:after
+	{
+	content: "원";
+	position: absolute;
+	right: 10px;
+	font-size: 1.6rem;
+	bottom: 50%;
+	transform: translateY(50%);
+}
+
+.modal .delevery_time .input_area {
+	position: relative;
+}
+
+.modal .delevery_time .input_area:after {
+	content: "분";
+	position: absolute;
+	right: 10px;
+	font-size: 1.6rem;
+	bottom: 50%;
+	transform: translateY(50%);
+}
+
+.modal .store_des .input_area {
+	height: 100px;
+}
+
+.modal #store_des {
+	width: 100%;
+	height: 100%;
+	padding: 0 10px;
+	box-sizing: border-box;
+	border: 1px solid #000;
+}
+
+#btn_box button:last-child {
+	background: rgb(48, 218, 217);
+}
+
+@media ( max-width :767px) {
+	.modal #store_des {
+		border-radius: 10px;
+	}
+	.modal .input_area {
+		width: 80%;
+	}
+}
+
+@media ( max-width :480px) {
+	.modal .input_area {
+		width: 90%;
+	}
+}
+/*-------------- 매장 등록 모달 -----------------*/
+
+
