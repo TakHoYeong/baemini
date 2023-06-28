@@ -11,7 +11,7 @@ import com.google.gson.Gson;
 public class FoodInfoFromJson {
 	
 	public static List<Cart> foodInfoFromJson(String foodInfoJSON) {
-		Map<String, Object>  map = new HashMap<>();
+		Map<String, Object> map = new HashMap<>();
 		String[] arr = foodInfoJSON.split("/");
 		Gson gson = new Gson();
 		

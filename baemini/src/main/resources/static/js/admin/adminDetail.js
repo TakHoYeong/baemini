@@ -1,5 +1,4 @@
 
-
 $(document).ready(function() {
 	const pathArr = location.pathname.split("/");
 	const storeId = pathArr[pathArr.length-1];

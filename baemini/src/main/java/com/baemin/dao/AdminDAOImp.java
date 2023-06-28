@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.baemin.dto.Food;
 import com.baemin.dto.Store;
 
 @Repository
@@ -35,6 +36,16 @@ public class AdminDAOImp implements AdminDAO {
 	public void storeInfoUpdate(Store store) {
 		sql.update("admin.storeInfoUpdate", store);
 	}
-	
+
+	@Override
+	public long addMenu(Food food) {
+		sql.insert("admin.addMenu", food);
+		return food.getId();
+	}
+
+	@Override
+	public void addmenuOption(List<Map<String, Object>> optionList) {
+		sql.insert("admin.menuOption", optionList);
+	}
 	
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.baemin.dao.AdminDAO;
+import com.baemin.dto.Food;
 import com.baemin.dto.Store;
 
 @Service
@@ -24,4 +25,8 @@ public class AdminServiceImp implements AdminService{
 		adminDAO.storeInfoUpdate(store);
 	}
 	
+	@Override
+	public void addMenu(Food food, String[] foodOption, Integer[] foodOptionPrice) {
+		adminDAO.addMenu(food);
+	}
 }
