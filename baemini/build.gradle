@@ -32,6 +32,8 @@ dependencies {
 	implementation 'com.navercorp.lucy:lucy-xss-servlet:2.0.0'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	implementation 'org.springframework.security:spring-security-taglibs:4.0.4.RELEASE'
+	
 	
 	
 	compileOnly 'org.projectlombok:lombok'
