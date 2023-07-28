@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="admin">
+
+	<select id="myStore" resultType="Store">
+		WITH R_COUNT AS (
+		    SELECT STORE_ID
+	                ,ROUND(AVG(SCORE), 1) SCORE
+	                ,COUNT(REVIEW_CONTENT) REVIEW_COUNT
+	                ,COUNT(BOSS_COMMENT) BOSS_COMMENT_COUNT 
+	        FROM    BM_REVIEW 
+	        GROUP BY STORE_ID
+		),
+		STORE AS (
+		    SELECT  S.*,
+		            T.*
+		    FROM        BM_STORE S
+		    LEFT JOIN   R_COUNT T
+		    ON          S.ID = T.STORE_ID
+	        LEFT JOIN   BM_MY_STORE M
+	        ON          S.ID = M.STORE_ID
+	        WHERE       M.USER_ID = #{user_id }
+		)
+		SELECT * FROM STORE
+	</select>
+	
+	<select id="getMyStoreId" resultType="long">
+		SELECT STORE_ID FROM BM_MY_STORE WHERE USER_ID = #{userId }
+	</select>
+
+
+	<insert id="pointUpdate" >
+		INSERT INTO BM_POINT (
+			USER_ID
+			,INFO
+			,POINT
+		) VALUES (
+			#{userId }
+			,#{info }
+			,#{point }
+		)
+	</insert>
+	
+	<update id="storeInfoUpdate">
+		UPDATE BM_STORE SET
+			CATEGORY = #{category }
+			,STORE_NAME = #{storeName }
+			,STORE_ADDRESS1 = #{storeAddress1 }
+			,STORE_ADDRESS2 = #{storeAddress2 }
+			,STORE_ADDRESS3 = #{storeAddress3 }
+			,STORE_PHONE = #{storePhone }
+			,STORE_IMG = #{storeImg }
+			,STORE_THUMB = #{storeThumb }
+			,OPENING_TIME = #{openingTime }
+			,CLOSING_TIME = #{closingTime }
+			,MIN_DELEVERY = #{minDelevery }
+			,DELEVERY_TIME = #{deleveryTime }
+			,DELEVERY_TIP = #{deleveryTip }
+			,STORE_DES = #{storeDes }
+		WHERE
+			ID = #{id }  
+	</update>
+	
+	<insert id="addMenu">
+	   <selectKey keyProperty="id" resultType="long" order="BEFORE" >
+	    SELECT FOOD_ID_SEQ.NEXTVAL FROM DUAL
+	   </selectKey>
+	   INSERT INTO BM_FOOD (
+			   ID
+			   ,STORE_ID
+			   ,FOOD_NAME
+			   ,FOOD_PRICE
+			   ,FOOD_DEC
+			   ,FOOD_IMG
+			   ,FOOD_THUMB
+		   ) VALUES (
+			   #{id }
+			   ,#{storeId }
+			   ,#{foodName }
+			   ,#{foodPrice }
+			   ,#{foodDec }
+			   ,#{foodImg }
+			   ,#{foodThumb }
+		   )
+	</insert>
+	
+	<insert id="addMenuOption">
+		INSERT INTO BM_FOOD_OPTION 
+		<foreach collection="list" item="item"  separator="UNION ALL" >
+				SELECT	GET_OPTION_SEQ()
+						,#{item.foodId }
+						,#{item.optionName }
+						,#{item.optionPrice } 
+				FROM	DUAL
+		</foreach>
+	</insert>
+	
+	<update id="updateMenu">
+		DECLARE BEGIN
+			UPDATE	BM_FOOD 
+			SET		STORE_ID = #{food.storeId }
+					,FOOD_NAME = #{food.foodName }
+					,FOOD_PRICE = #{food.foodPrice }
+					,FOOD_DEC = #{food.foodDec }
+					,FOOD_IMG = #{food.foodImg }
+					,FOOD_THUMB = #{food.foodThumb }
+			WHERE	ID = #{food.id };
+		 
+			<if test="optionList != null">
+				DELETE BM_FOOD_OPTION WHERE FOOD_ID = #{food.id } AND ID NOT IN
+			<foreach collection="optionList" item="item" open="(" close=");" separator=","  >
+				${item.optionId }
+			</foreach>
+			
+			<foreach collection="optionList" item="item" separator=";" close=";">
+				<if test="item.optionId == -1">
+					INSERT INTO	BM_FOOD_OPTION
+					VALUES		(GET_OPTION_SEQ()
+								,#{food.id }
+								,#{item.optionName }
+								,#{item.optionPrice }) 
+				</if>
+				
+				<if test="item.optionId != -1">
+					UPDATE	BM_FOOD_OPTION 
+					SET		OPTION_NAME = #{item.optionName }
+							,OPTION_PRICE = #{item.optionPrice }
+					WHERE	FOOD_ID = #{food.id }
+					AND		ID = #{item.optionId }		
+				</if>
+			</foreach>
+			</if>
+		
+		END;	
+	</update>
+	
+	
+	<delete id="deleteMenu">
+		DELETE BM_FOOD WHERE STORE_ID = ${storeId } AND ID IN 
+		<foreach collection="deleteNumber" item="arr" open="(" close=")" separator="," >
+			${arr }
+		</foreach>
+	</delete>
+
+	
+	<delete id="deleteMenuOption">
+		DELETE BM_FOOD_OPTION WHERE FOOD_ID = #{foodId }
+	</delete>
+	
+	<update id="bossComment">
+		UPDATE BM_REVIEW SET
+			BOSS_COMMENT = #{bossComment }
+		WHERE
+			ORDER_NUM = #{orderNum }
+		AND
+			STORE_ID = #{storeId }
+	</update>
+	
+	<select id="orderList" resultType="OrderList">
+		WITH T_ORDER AS ( 
+		    SELECT * FROM (
+		    	SELECT * FROM BM_ORDER_USER UNION ALL SELECT * FROM BM_ORDER_NON_USER) WHERE STORE_ID = #{storeId }
+		),
+		T_DETAIL AS (
+		    SELECT  ORDER_NUM, 
+		            LISTAGG(FOOD_INFO, '/') WITHIN GROUP(ORDER BY ORDER_NUM) FOOD_INFO
+		    FROM BM_ORDER_DETAIL_USER N
+		    GROUP BY    ORDER_NUM
+		    UNION ALL
+		    SELECT  ORDER_NUM, 
+		            LISTAGG(FOOD_INFO, '/') WITHIN GROUP(ORDER BY ORDER_NUM) FOOD_INFO
+		    FROM BM_ORDER_DETAIL_NON_USER N
+		    GROUP BY    ORDER_NUM
+		)
+		 SELECT   COUNT1
+	              ,COUNT2
+	              ,O.*
+	              ,D.FOOD_INFO
+	              ,S.STORE_NAME
+	              ,S.DELEVERY_TIP
+	      FROM (
+	          SELECT  #{storeId } AS STORE_ID
+	                          ,A.COUNT COUNT1
+	                          ,B.COUNT COUNT2
+	                  FROM    (SELECT COUNT(*) COUNT FROM T_ORDER WHERE DELEVERY_STATUS = '주문접수 대기 중') A,
+	                          (SELECT COUNT(*) COUNT FROM T_ORDER WHERE DELEVERY_STATUS LIKE '배달 준비 중%') B
+	      ) ORDER_COUNT
+	      LEFT JOIN
+	      (SELECT * FROM
+	          (SELECT ROWNUM RN, T.* FROM (
+	              SELECT * FROM T_ORDER WHERE DELEVERY_STATUS LIKE '${list }%' ORDER BY ORDER_DATE) T ) 
+	       WHERE RN BETWEEN #{firstList } AND #{lastList }
+	       )O       
+	      ON          ORDER_COUNT.STORE_ID = O.STORE_ID
+	      LEFT JOIN   T_DETAIL D      
+	      ON          O.ORDER_NUM  = D.ORDER_NUM
+	      LEFT JOIN   BM_STORE S
+	      ON          O.STORE_ID = S.ID
+	      ORDER BY ORDER_DATE
+	</select>
+	
+	<update id="orderAccept">
+		<if test="userId == 0">
+			UPDATE BM_ORDER_NON_USER SET
+		</if>
+		<if test="userId != 0">
+			UPDATE BM_ORDER_USER SET
+		</if>
+			DELEVERY_STATUS = '배달 준비 중(약 ${time}분 후에 도착)'
+			WHERE ORDER_NUM = #{orderNum }
+	</update>
+
+</mapper>
