@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="order">
+
+	<select id="getDeleveryTip" resultType="int">
+		SELECT DELEVERY_TIP FROM BM_STORE WHERE ID = #{storeId }
+	</select>
+ 
+ 
+ 
+	<select id="foodPriceList" resultType="int">
+		<foreach collection="list" item="item"  separator="union all" >
+			select sum(food_price) sum from bm_food where id = #{item.foodId}
+		</foreach>
+	</select>
+	
+	
+	<select id="optionPriceList" resultType="int">
+		
+		<foreach collection="list" item="item"  separator="union all" >
+			<if test="item.optionId == null">
+				select 0 from dual 
+			</if>
+			
+			<if test="item.optionId != null">
+				select sum(option_price) sum from bm_food_option where id in
+				<foreach collection="item.optionId" item="i" open="(" close=")" separator="," >
+					#{i}
+				</foreach>
+			</if>
+			
+		</foreach>
+		
+	</select>
+	
+	<insert id="order">
+		<if test="userId == 0">
+			INSERT INTO BM_ORDER_NON_USER (
+			    ORDER_NUM
+			    ,STORE_ID 
+			    ,USER_ID 
+			    ,PAY_METHOD 
+			    ,PHONE
+			    ,DELEVERY_ADDRESS1
+			    ,DELEVERY_ADDRESS2
+			    ,DELEVERY_ADDRESS3
+			    ,TOTAL_PRICE 
+			    ,USED_POINT 
+			    ,REQUEST 
+		    ) VALUES (
+			    ${orderNum }
+			    ,#{storeId }
+			    ,#{userId }
+			    ,#{payMethod }
+			    ,#{phone }  
+			    ,#{deleveryAddress1 }
+			    ,#{deleveryAddress2 }
+			    ,#{deleveryAddress3 } 
+			    ,#{totalPrice } 
+			    ,#{usedPoint } 
+			    ,#{request } 
+		    )
+		</if>
+		
+		
+		<if test="userId != 0">
+			INSERT INTO BM_ORDER_USER (
+			     ORDER_NUM
+			    ,STORE_ID 
+			    ,USER_ID 
+			    ,PAY_METHOD 
+			    ,PHONE
+			    ,DELEVERY_ADDRESS1
+			    ,DELEVERY_ADDRESS2
+			    ,DELEVERY_ADDRESS3
+			    ,TOTAL_PRICE 
+			    ,USED_POINT 
+			    ,REQUEST 
+		    ) VALUES (
+			    ${orderNum }
+			    ,#{storeId }
+			    ,#{userId }
+			    ,#{payMethod }
+			    ,#{phone }  
+			    ,#{deleveryAddress1 }
+			    ,#{deleveryAddress2 }
+			    ,#{deleveryAddress3 } 
+			    ,#{totalPrice } 
+			    ,#{usedPoint } 
+			    ,#{request } 
+		    )
+		</if>
+	</insert>
+	
+	<insert id="orderDetail">
+		INSERT ALL
+		<foreach collection="detail" item="detail" >
+		<if test="userId == 0">
+		INTO BM_ORDER_DETAIL_NON_USER (
+		</if>
+		
+		<if test="userId != 0">
+		INTO BM_ORDER_DETAIL_USER (
+		</if>
+		ORDER_NUM
+		,food_info
+		) VALUES
+		(
+		#{detail.orderNum }
+		,#{detail.foodInfoJSON }
+		)
+		</foreach>
+		SELECT * FROM DUAL
+	</insert>
+	
+	<select id="orderList" resultType="OrderList">
+	SELECT * FROM (
+    	SELECT	ROWNUM R
+    			,O.* 
+    	FROM 	(SELECT	count(*) over() list_count,
+				    	o.order_num,
+				    	o.user_id,
+				    	o.order_date,
+				    	o.pay_method,
+				    	o.delevery_status,
+				    	o.delevery_address1,
+				    	o.delevery_address2,
+				    	o.delevery_address3,
+				    	o.store_id,
+				    	o.total_price,
+				    	o.used_point,
+                        o.request,
+                        d.food_info,
+				    	s.store_name,
+					    s.store_img,
+					    s.store_thumb,
+					    s.delevery_tip,
+			            r.review_content,
+			            r.score,
+			            r.review_img
+			FROM		bm_order_user o
+			LEFT JOIN   (SELECT  ORDER_NUM, 
+                                 LISTAGG(FOOD_INFO, '/') WITHIN GROUP(ORDER BY ORDER_NUM) AS food_info
+                        FROM     BM_ORDER_DETAIL_USER 
+                        GROUP BY ORDER_NUM) d
+			ON		  	o.order_num = d.order_num
+			LEFT JOIN	bm_store s
+			ON		 	o.store_id = s.id
+	        LEFT JOIN	bm_review r
+	        ON			o.order_num = r.order_num
+			WHERE		o.user_id = #{userId }
+			ORDER BY	o.order_date DESC
+	        ) O
+		) 
+	</select>
+	
+	<select id="orderListDetail" resultType="OrderList">
+		SELECT	o.order_num,
+		    	o.user_id,
+		    	o.order_date,
+		    	o.pay_method,
+		    	o.delevery_status,
+		    	o.phone,
+		    	o.delevery_address1,
+		    	o.delevery_address2,
+		    	o.delevery_address3,
+		    	o.store_id,
+		    	o.total_price,
+		    	o.used_point,
+                o.request,
+                d.food_info,
+		    	s.store_name,
+			    s.delevery_tip
+	FROM		bm_order_user o
+	LEFT JOIN   (SELECT  ORDER_NUM, 
+                         LISTAGG(FOOD_INFO, '/') WITHIN GROUP(ORDER BY ORDER_NUM) AS food_info
+                FROM     BM_ORDER_DETAIL_USER 
+                GROUP BY ORDER_NUM) d
+	ON		  	o.order_num = d.order_num
+	LEFT JOIN	bm_store s
+	ON		 	o.store_id = s.id 
+    LEFT JOIN	bm_review r
+    ON			o.order_num = r.order_num
+	WHERE		o.order_num = #{orderNum }
+	ORDER BY	o.order_date desc
+	</select>
+	
+</mapper>

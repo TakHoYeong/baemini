@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user">
+ 
+	<select id="overlapCheck" resultType="int">
+		SELECT COUNT(*) FROM BM_USER WHERE ${valueType } = #{value }
+	</select>
+	
+	
+	<insert id="join">
+		INSERT INTO BM_USER (
+			ID,
+			USERNAME,
+			PASSWORD,
+			EMAIL,
+			NICKNAME,
+			PHONE
+		) VALUES (
+			USER_ID_SEQ.NEXTVAL,
+			#{username},
+			#{password},
+			#{email},
+			#{nickname},
+			#{phone}
+		)
+	</insert>
+	
+	<select id="login" resultType="User">
+    SELECT 
+        U.ID
+        ,U.USERNAME
+        ,U.PASSWORD
+        ,U.EMAIL
+        ,U.NICKNAME
+        ,U.PHONE
+        ,U.RATING
+        ,U.ROLE
+        ,P.POINT
+    FROM 
+        BM_USER U 
+    LEFT JOIN 
+        (SELECT USER_ID, SUM(POINT) POINT FROM BM_POINT GROUP BY USER_ID) P
+    ON 
+        U.ID = P.USER_ID
+    WHERE U.USERNAME = #{username }    
+</select>
+
+	
+	
+</mapper>
