@@ -1,0 +1,240 @@
+@charset "UTF-8";
+
+.move_top {
+	position: fixed;
+	right: 1%;
+	bottom: 1%;
+	cursor: pointer;
+	width: 40px;
+	height: 40px;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #ddd;
+	box-shadow: 0px 2px 3px 0px rgb(0 0 0/ 25%);
+}
+
+.move_top:hover {
+	background: #eee;
+}
+
+.move_top div {
+	border-top: 3px solid #000;
+	border-left: 3px solid #000;
+	width: 10px;
+	height: 10px;
+	margin: 0px auto;
+	transform: translateY(15px) rotate(45deg);
+}
+
+.wrap {
+	width: 95%;
+	max-width: 1200px;
+	margin: 0 auto 30px;
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.tab .box #select {
+	background: #30DAD9;
+}
+
+.aside_tab .active {
+	background: #fff;
+	border-right: none;
+}
+
+/* 상단 메뉴 */
+section.tab {
+	width: 100%;
+	margin-top: 50px;
+}
+
+section.tab ul {
+	display: flex;
+	background: #333333;
+}
+
+section.tab ul li {
+	width: 100%;
+	text-align: center;
+	border: 0px;
+	font-size: 2rem;
+	background: #333333;
+	cursor: pointer;
+	height: 60px;
+	display: flex;
+	justify-content: center;
+}
+
+section.tab ul li a {
+	color: #fff;
+	display: block;
+	width: 100%;
+	height: 100%;
+	line-height: 60px;
+}
+
+section.tab ul li:hover {
+	background: #30DAD9;
+	transition: ease-in-out 0.15s
+}
+/* 상단 메뉴 */
+
+/* 왼쪽 메뉴 */
+aside {
+	width: 10%;
+	background: #ddd;
+}
+
+aside ul {
+	border-left: 1px solid #ddd;
+}
+
+aside ul li {
+	font-size: 2rem;
+	border-left: 0;
+	height: 180px;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+}
+
+aside ul li:focus {
+	background: red;
+}
+/* 왼쪽 메뉴 */
+
+/* 메인 */
+main {
+	width: 90%;
+}
+
+#cont_box {
+	min-height: calc(100vh - 315px);
+}
+
+#cont_box .order_box {
+	display: flex;
+	border-bottom: 1px solid #ccc;
+	padding: 10px;
+}
+
+#cont_box .order_box>div {
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+}
+
+#cont_box .order_box .time {
+	width: 115px;
+	padding: 30px 0;
+	align-items: center;
+	margin-right: 10px;
+}
+
+#cont_box .order_box .time>div:first-child {
+	font-size: 1.8rem;
+}
+
+#cont_box .order_box .time>div:last-child {
+	font-size: 2.4rem;
+	font-weight: bold;
+}
+
+#cont_box .order_box .info {
+	flex: 5;
+}
+
+#cont_box .order_box .button_box {
+	flex: 1;
+}
+
+#cont_box .order_box .button_box .btn {
+	width: 100px;
+	height: 85%;
+	font-weight: bold;
+	font-size: 2rem;
+	border: 2px solid #ddd;
+	background: #1A7CFF;
+	color: #fff;
+}
+
+#cont_box .order_box .payMethod {
+	border: 1px solid #ccc;
+	font-size: 1.3rem;
+	padding: 7px;
+	margin-left: 5px;
+	background: #fff;
+	color: red;
+}
+/* 메인 */
+@media ( max-width :1024px) {
+	.wrap {
+		width: 100%;
+	}
+	.tab .box {
+		display: none;
+	}
+	header .admin_page_btn {
+		display: none;
+	}
+	header .menu_tab {
+		display: block;
+	}
+	aside {
+		width: 100%;
+		margin-top: 30px;
+	}
+	aside ul li:hover {
+		background: #30DAD9;
+	}
+	aside ul {
+		display: flex;
+	}
+	aside ul li {
+		width: 50%;
+		height: 60px;
+	}
+	main {
+		width: 99%;
+	}
+	#cont_box .order_box {
+		padding: 5px;
+	}
+	#cont_box .order_box .time {
+		padding: 25px 0;
+	}
+}
+
+@media ( max-width :767px) {
+	section.tab {
+		width: 100%;
+	}
+	section.tab ul li {
+		height: 50px;
+	}
+	section.tab ul li a {
+		line-height: 50px;
+	}
+	aside ul li {
+		height: 50px;
+	}
+	#cont_box .order_box .time {
+		width: 100px;
+	}
+	#cont_box .order_box .button_box .btn {
+		border-radius: 10px;
+	}
+}
+
+@media ( max-width :480px) {
+	#cont_box .order_box .time {
+		width: 80px;
+		padding: 20px 0;
+	}
+	#cont_box .order_box .button_box .btn {
+		width: 70px;
+	}
+}
