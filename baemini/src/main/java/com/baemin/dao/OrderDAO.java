@@ -6,7 +6,6 @@ import com.baemin.dto.Cart;
 import com.baemin.dto.OrderDetail;
 import com.baemin.dto.OrderInfo;
 import com.baemin.dto.OrderList;
-
 public interface OrderDAO {
 	
 	//메뉴 총합가격 계산시 배달팁 가져오기
